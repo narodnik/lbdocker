@@ -1,0 +1,51 @@
+diff --git a/configure.ac b/configure.ac
+index 5b728f74..45d0d8ae 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -48,7 +48,7 @@ AC_PROG_LIBTOOL
+ AC_CANONICAL_HOST
+ 
+ # Enable silent rules option.
+-m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
++#m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+ 
+ # Check for pkg-config.
+ PKG_PROG_PKG_CONFIG
+@@ -209,23 +209,23 @@ AS_CASE([${with_tests}], [yes],
+ 
+ # Require pthread and output ${pthread_CPPFLAGS/LIBS}.
+ #------------------------------------------------------------------------------
+-AX_PTHREAD(
+-    [AC_SUBST([pthread_CPPFLAGS], [${PTHREAD_CPPFLAGS}])
+-     AC_SUBST([pthread_LIBS], [${PTHREAD_LIBS}])
+-     AC_MSG_NOTICE([pthread_CPPFLAGS : ${pthread_CPPFLAGS}])
+-     AC_MSG_NOTICE([pthread_LIBS : ${pthread_LIBS}])],
+-    [AC_MSG_ERROR([pthread library is required but was not found.])])
+-# Hard wired -lpthread because AX_PTHREAD does not do it.
+-AC_SUBST([pthread_LIBS], [-lpthread])
++#AX_PTHREAD(
++#    [AC_SUBST([pthread_CPPFLAGS], [${PTHREAD_CPPFLAGS}])
++#     AC_SUBST([pthread_LIBS], [${PTHREAD_LIBS}])
++#     AC_MSG_NOTICE([pthread_CPPFLAGS : ${pthread_CPPFLAGS}])
++#     AC_MSG_NOTICE([pthread_LIBS : ${pthread_LIBS}])],
++#    [AC_MSG_ERROR([pthread library is required but was not found.])])
++## Hard wired -lpthread because AX_PTHREAD does not do it.
++#AC_SUBST([pthread_LIBS], [-lpthread])
+ 
+ # Require rt if on linux and output ${rt_LIBS}.
+ #------------------------------------------------------------------------------
+-AS_CASE([${host_os}], [*linux*],
+-    [AC_CHECK_LIB([rt], [clock_gettime],
+-        [AC_SUBST([rt_LIBS], [-lrt])
+-         AC_MSG_NOTICE([rt_LIBS : ${rt_LIBS}])],
+-        [AC_MSG_ERROR([rt library is required but was not found.])])],
+-    [AC_SUBST([rt_LIBS], [])])
++#AS_CASE([${host_os}], [*linux*],
++#    [AC_CHECK_LIB([rt], [clock_gettime],
++#        [AC_SUBST([rt_LIBS], [-lrt])
++#         AC_MSG_NOTICE([rt_LIBS : ${rt_LIBS}])],
++#        [AC_MSG_ERROR([rt library is required but was not found.])])],
++#    [AC_SUBST([rt_LIBS], [])])
+ 
+ # Require icu-i18n of at least version 51.2 and output ${icu_i18n_CPPFLAGS/LIBS/PKG}.
+ #------------------------------------------------------------------------------
