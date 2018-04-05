@@ -21,9 +21,7 @@ RUN cd && git clone https://github.com/moritz-wundke/Boost-for-Android && cd Boo
     && cp build/out/armeabi-v7a/lib/*.a $LOCAL_DEPS/lib/ \
     && cd .. && rm -rf Boost-For-Android
 
-COPY libbitcoin-configure.ac-diff /home/user/
 RUN cd && git clone https://github.com/libbitcoin/libbitcoin && cd libbitcoin \
-    && patch configure.ac < /home/user/libbitcoin-configure.ac-diff \
     && /opt/helpers/build-standalone "./autogen.sh && ./configure --host=${ANDROID_NDK_TOOLCHAIN_PREFIX} --disable-shared --with-boost=$LOCAL_DEPS --prefix=$LOCAL_DEPS && make -j`nproc` && make install" \
     && cd .. && rm -rf libbitcoin
 
